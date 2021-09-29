@@ -1,8 +1,9 @@
 import argparse
 import os
 from urllib.parse import urlparse
-import requests
+
 from dotenv import load_dotenv
+import requests
 
 
 def shorten_link(token, url):
@@ -36,8 +37,9 @@ def is_bitlink(token, url):
 if __name__ == '__main__':
     load_dotenv()
     token = os.getenv('BITLY_TOKEN')
-    parser = argparse.ArgumentParser()
-    parser.add_argument('url', help='URL страницы')
+    parser = argparse.ArgumentParser(description='При передаче URL страницы в качестве аргумента - создается короткая ссылка (битлинк). '
+                                                 'При передаче битлинка в качестве аргумента - выводится количество переходов по нему.' )
+    parser.add_argument('url', help='URL страницы, либо битлинк')
     url = parser.parse_args().url
     if is_bitlink(token, url):
         try:
